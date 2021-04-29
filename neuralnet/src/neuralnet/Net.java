@@ -2,11 +2,11 @@ package neuralnet;
 
 import java.util.List;
 
-public class Neuron {
-	List<Double> input;
+public class Net {
+	List<Layer> layers;
 	
-	public Neuron() {
+	public Net() {
 		// TODO Auto-generated constructor stub
-		//test
 	}
+
 }

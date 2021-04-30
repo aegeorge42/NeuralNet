@@ -6,10 +6,13 @@ public class Neuron {
 	List<Double> input;
 	List<Double> weight;
 	double output;
+	int layer;
 	
-	Neuron(List<Double> input, List<Double> weight) {
+	Neuron(int layer, List<Double> input, List<Double> weight) {
+		this.layer = layer;
 		this.input=input;
 		this.weight=weight;
+		output=calcOut(input, weight);
 	}
 	
 	//Calculate single output from each neuron given input and weights
@@ -21,12 +24,11 @@ public class Neuron {
 			outArray[i] = input.get(i) * weight.get(i);
 			sum=sum+outArray[i];		
 		}
-		System.out.println("sum is " + sum);
-		output = sum;
+	//	System.out.println("sum is " + sum);
 		return sum;
 	}
 	
-	/*
+	
 	public static void main(String[] args) {
 		
 		List<Double> input = new ArrayList<Double>();
@@ -39,15 +41,14 @@ public class Neuron {
 		weight.add(0.2);
 		weight.add(0.3);
 		
-		Neuron n = new Neuron(input, weight);
+		Neuron n = new Neuron(1, input, weight);
 		
 		
 		System.out.println("input is " + input);
 		System.out.println("weight is " + weight);
 		
-		n.calcOut(input, weight);
 		
 	}
-	*/
+	
 }
 

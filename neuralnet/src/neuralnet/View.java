@@ -18,9 +18,9 @@ public class View extends Application {
 	Group root;
 	Button neuronButton;
 	
-    public static void main(String[] args) {
-        launch(args);
-    }
+    //public static void main(String[] args) {
+    //    launch(args);
+    //}
  
     @Override
     public void start(Stage primaryStage) {

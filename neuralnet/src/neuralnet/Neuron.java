@@ -6,10 +6,10 @@ public class Neuron {
 	List<Double> input;
 	List<Double> weight;
 	double output;
-	int layer;
+	//for testing purposes only
+	String id;
 	
-	Neuron(int layer, List<Double> input, List<Double> weight) {
-		this.layer = layer;
+	Neuron(List<Double> input, List<Double> weight) {
 		this.input=input;
 		this.weight=weight;
 		output=calcOut(input, weight);
@@ -28,6 +28,10 @@ public class Neuron {
 		return sum;
 	}
 	
+	void setId(String id){
+		this.id = id;
+	}
+	
 	
 	public static void main(String[] args) {
 		
@@ -41,7 +45,7 @@ public class Neuron {
 		weight.add(0.2);
 		weight.add(0.3);
 		
-		Neuron n = new Neuron(1, input, weight);
+		Neuron n = new Neuron(input, weight);
 		
 		
 		System.out.println("input is " + input);

@@ -5,45 +5,53 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Net {
-	List<Neuron> neurons;
+	List<Layer> layers;
+
 	
 	public Net() {
-		List<Neuron> n = new ArrayList<Neuron>();
-		neurons=n;
+		List<Layer> l = new ArrayList<Layer>();
+		layers=l;
 	}
 
-	Neuron createNeuron(int layer, List<Double> input, List<Double> weight) {
-		Neuron n = new Neuron(layer,input,weight);
-		neurons.add(n);
-		return n;
+	//TODO: get rid of this
+	//if a layer is added it comes with 1 neuon
+	//no such thing as empty layer
+	public void addEmptyLayer(Layer l) {
+		layers.add(l);
 	}
 	
 	public static void main(String[] args) {
+		
+		//the first set of input values does not change
+		List<Double> staticInput = new ArrayList<Double>();
+		staticInput.add(1.0);
+		staticInput.add(2.0);
+		staticInput.add(3.0);
+		
 		Net net = new Net();
+		Layer l1 = new Layer(1);
+		Layer l2 = new Layer(2);
 		
-		List<Double> input1 = new ArrayList<Double>();
-		input1.add(5.0);
-		input1.add(10.0);
-		input1.add(15.0);
+		net.addEmptyLayer(l1);
+		net.addEmptyLayer(l2);
 		
-		List<Double> weight1 = new ArrayList<Double>();
-		weight1.add(0.1);
-		weight1.add(0.2);
-		weight1.add(0.3);
+		l1.addNeuron(staticInput, "a");
+		l1.addNeuron(staticInput, "b");
+		l1.addNeuron(staticInput, "c");
 		
-		net.createNeuron(1,input1, weight1);
+		l2.addNeuron(staticInput, "d");
 		
-		List<Double> weight2 = new ArrayList<Double>();
-		weight2.add(0.2);
-		weight2.add(0.4);
-		weight2.add(0.6);
 		
-		net.createNeuron(1, input1, weight2);
-		
-		System.out.println("your net has " + net.neurons.size() + " neurons");
-		for (Neuron neuron : net.neurons) {
-			System.out.println("layer: " + neuron.layer +" output: " + neuron.output);
+		System.out.println("your net has " + net.layers.size() + " layers");
+		for(int i=0; i<net.layers.size(); i++) {
+			Layer currentLayer=net.layers.get(i);
+			System.out.println("layer " + currentLayer.layerNum + " has " + currentLayer.neurons.size() + " neurons");
+			for(int j=0; j<currentLayer.neurons.size(); j++) {
+				Neuron currentNeuron = currentLayer.neurons.get(j);
+				System.out.println(currentLayer.layerNum + currentNeuron.id);
+			}
 		}
-		
 	}
 }
+	
+

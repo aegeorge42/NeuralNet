@@ -12,11 +12,10 @@ public class Neuron {
 	Neuron(List<Double> input, List<Double> weight) {
 		this.input=input;
 		this.weight=weight;
-		output=calcOut(input, weight);
 	}
 	
 	//Calculate single output from each neuron given input and weights
-	public double calcOut(List<Double> input, List<Double> weight) {
+	public double calcOut() {
 		double[] outArray = new double[input.size()];
 		double sum = 0;
 		
@@ -24,7 +23,7 @@ public class Neuron {
 			outArray[i] = input.get(i) * weight.get(i);
 			sum=sum+outArray[i];		
 		}
-	//	System.out.println("sum is " + sum);
+		output=sum;
 		return sum;
 	}
 	
@@ -35,21 +34,54 @@ public class Neuron {
 	
 	public static void main(String[] args) {
 		
-		List<Double> input = new ArrayList<Double>();
-		input.add(5.0);
-		input.add(10.0);
-		input.add(15.0);
+		List<Double> staticInput = new ArrayList<Double>();
+		staticInput.add(5.0);
+		staticInput.add(10.0);
+		staticInput.add(15.0);
 		
-		List<Double> weight = new ArrayList<Double>();
-		weight.add(0.1);
-		weight.add(0.2);
-		weight.add(0.3);
+		List<Double> weight1 = new ArrayList<Double>();
+		weight1.add(0.1);
+		weight1.add(0.2);
+		weight1.add(0.3);
 		
-		Neuron n = new Neuron(input, weight);
+		List<Double> weight2 = new ArrayList<Double>();
+		weight2.add(0.9);
+		weight2.add(0.8);
+		weight2.add(0.7);
 		
+		Neuron n1 = new Neuron(staticInput, weight1);
+		n1.setId("n1");
+		n1.calcOut();
 		
-		System.out.println("input is " + input);
-		System.out.println("weight is " + weight);
+		Neuron n2 = new Neuron(staticInput, weight2);
+		n2.setId("n2");
+		n2.calcOut();
+		
+		System.out.println(n1.id);
+		System.out.println("input is " + n1.input);
+		System.out.println("weight is " + n1.weight);
+		System.out.println("output is " + n1.output);
+		
+		System.out.println(n2.id);
+		System.out.println("input is " + n2.input);
+		System.out.println("weight is " + n2.weight);
+		System.out.println("output is " + n2.output);
+		
+		List<Double> l2input = new ArrayList<Double>();
+		l2input.add(n1.output);
+		l2input.add(n2.output);
+		
+		List<Double> l2weight= new ArrayList<Double>();
+		l2weight.add(0.25);
+		l2weight.add(0.5);
+		
+		Neuron n3 = new Neuron(l2input, l2weight);
+		n3.calcOut();
+		
+		System.out.println(n3.id);
+		System.out.println("input is " + n3.input);
+		System.out.println("weight is " + n3.weight);
+		System.out.println("output is " + n3.output);
 		
 		
 	}

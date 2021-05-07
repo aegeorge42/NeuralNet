@@ -1,25 +1,31 @@
 package neuralnet;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Net {
 	List<Layer> layers;
 
-	
 	public Net() {
-		List<Layer> l = new ArrayList<Layer>();
-		layers=l;
+		List<Layer> layerList = new ArrayList<Layer>();
+		layers=layerList;
 	}
 
 	//TODO: get rid of this
 	//if a layer is added it comes with 1 neuon
 	//no such thing as empty layer
-	public void addEmptyLayer(Layer l) {
-		layers.add(l);
+	public void addEmptyLayer() {
+		if(layers.size()==0) {
+			layers.add(new Layer(1));
+		} else {
+			layers.add(new Layer(layers.size()+1));
+		}
 	}
 	
+	Layer getLayer(int num) {
+		Layer returnLayer = layers.get(num-1);
+		return returnLayer;
+	}
 	public static void main(String[] args) {
 		
 		//the first set of input values does not change
@@ -32,24 +38,26 @@ public class Net {
 		Layer l1 = new Layer(1);
 		Layer l2 = new Layer(2);
 		
-		net.addEmptyLayer(l1);
-		net.addEmptyLayer(l2);
 		
-		l1.addNeuron(staticInput, "a");
-		l1.addNeuron(staticInput, "b");
-		l1.addNeuron(staticInput, "c");
+		l1.addNeuron(staticInput, "1a");
+		l1.addNeuron(staticInput, "1b");
+		l1.addNeuron(staticInput, "1c");
 		
-		l2.addNeuron(staticInput, "d");
+		List<Double> layer1out = new ArrayList<Double>();
+		for (Neuron neuron : l1.neurons) {
+			layer1out.add(neuron.output);
+		}
 		
+		l2.addNeuron(layer1out, "2a");
+		for (Neuron neuron : l2.neurons) {
+			System.out.println(neuron.output);
+		}
 		
-		System.out.println("your net has " + net.layers.size() + " layers");
-		for(int i=0; i<net.layers.size(); i++) {
-			Layer currentLayer=net.layers.get(i);
-			System.out.println("layer " + currentLayer.layerNum + " has " + currentLayer.neurons.size() + " neurons");
-			for(int j=0; j<currentLayer.neurons.size(); j++) {
-				Neuron currentNeuron = currentLayer.neurons.get(j);
-				System.out.println(currentLayer.layerNum + currentNeuron.id);
+		for(Layer layer : net.layers) {
+			for(Neuron neuron : layer.neurons) {
+				System.out.println(neuron.id + " input: " + neuron.input + " output: " + neuron.output);
 			}
+			
 		}
 	}
 }

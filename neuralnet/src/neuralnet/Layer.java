@@ -6,11 +6,14 @@ import java.util.List;
 public class Layer {
 	List<Neuron> neurons;
 	int layerNumber;
+	List<Double> layerOutput;
 	
 	public Layer(int num) {
 		List<Neuron> n = new ArrayList<Neuron>();
+		List<Double> lo = new ArrayList<Double>();
 		neurons=n;
 		layerNumber=num;
+		layerOutput=lo;
 	}
 
 	//add a neuron to a layer
@@ -21,14 +24,16 @@ public class Layer {
 		for(int i=0; i<numInputs; i++) {
 			weights.add((double)Math.round(Math.random() * 100.0) / 100.0); //Math.random() for real
 		}
-	//	System.out.println(weights);
-		Neuron n = new Neuron(inputs,weights);
+	
+		if (this.layerNumber==1){
+		}
+		Neuron n = new Neuron();
+		n.setInput(inputs);
 		n.id=id;
 		neurons.add(n);
-		n.calcOut();
+		layerOutput.add(n.calcOut());
 		return n;
 	}
-	
 	
 	public static void main(String[] args) {
 		Layer layer1 = new Layer(1);

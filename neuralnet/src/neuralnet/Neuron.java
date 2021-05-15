@@ -9,11 +9,21 @@ public class Neuron {
 	//for testing purposes only
 	String id;
 	
-	Neuron(List<Double> input, List<Double> weight) {
-		this.input=input;
-		this.weight=weight;
+	//Neuron(List<Double> input, List<Double> weight) {
+	//	this.input=input;
+	//	this.weight=weight;
+	//}
+	
+	Neuron(){
 	}
 	
+	void setInput(List<Double> input){
+		this.input=input;
+	}
+	
+	void setWeight(List<Double> weight) {
+		this.weight=weight;
+	}
 	//Calculate single output from each neuron given input and weights
 	public double calcOut() {
 		double[] outArray = new double[input.size()];
@@ -49,13 +59,18 @@ public class Neuron {
 		weight2.add(0.8);
 		weight2.add(0.7);
 		
-		Neuron n1 = new Neuron(staticInput, weight1);
+		Neuron n1 = new Neuron();
+		n1.setInput(staticInput);
+		n1.setWeight(weight1);
 		n1.setId("n1");
 		n1.calcOut();
 		
-		Neuron n2 = new Neuron(staticInput, weight2);
-		n2.setId("n2");
-		n2.calcOut();
+		Neuron n2 = new Neuron();
+		n1.setInput(staticInput);
+		n1.setWeight(weight2);
+		n1.setId("n2");
+		n1.calcOut();
+		
 		
 		System.out.println(n1.id);
 		System.out.println("input is " + n1.input);
@@ -75,7 +90,7 @@ public class Neuron {
 		l2weight.add(0.25);
 		l2weight.add(0.5);
 		
-		Neuron n3 = new Neuron(l2input, l2weight);
+		Neuron n3 = new Neuron();
 		n3.calcOut();
 		
 		System.out.println(n3.id);

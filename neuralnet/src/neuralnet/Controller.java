@@ -46,6 +46,7 @@ public class Controller {
 				for(Neuron neuron : layer.neurons) {
 					System.out.println(neuron.id + " input: " + neuron.input + " output: " + neuron.output);
 				}
+				System.out.println("layer output:" + layer.layerOutput);
 
 			}
 		

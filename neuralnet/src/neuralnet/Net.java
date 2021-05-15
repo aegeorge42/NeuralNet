@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Net {
 	List<Layer> layers;
+	String actFn;
 
 	public Net() {
 		List<Layer> layerList = new ArrayList<Layer>();
@@ -12,7 +13,7 @@ public class Net {
 	}
 
 	//TODO: get rid of this
-	//if a layer is added it comes with 1 neuon
+	//if a layer is added it comes with 1 neuron
 	//no such thing as empty layer
 	public void addEmptyLayer() {
 		if(layers.size()==0) {
@@ -26,6 +27,18 @@ public class Net {
 		Layer returnLayer = layers.get(num-1);
 		return returnLayer;
 	}
+	
+	void setLayerInput() {
+		for(Layer layer : this.layers) {
+			
+			if(layer.layerNumber == 1) {
+				System.out.println("1st layer static input");
+			} else {
+			}
+		}
+		
+	}
+	
 	public static void main(String[] args) {
 		
 		//the first set of input values does not change

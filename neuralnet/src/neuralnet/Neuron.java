@@ -5,16 +5,13 @@ import java.util.*;
 public class Neuron {
 	List<Double> input;
 	List<Double> weight;
+	double bias;
 	double output;
-	//for testing purposes only
-	String id;
+	String actFn = "linear";
 	
-	//Neuron(List<Double> input, List<Double> weight) {
-	//	this.input=input;
-	//	this.weight=weight;
-	//}
-	
-	Neuron(){
+	Neuron(List<Double> input, List<Double> weight) {
+		this.input=input;
+		this.weight=weight;
 	}
 	
 	void setInput(List<Double> input){
@@ -24,28 +21,43 @@ public class Neuron {
 	void setWeight(List<Double> weight) {
 		this.weight=weight;
 	}
-	//Calculate single output from each neuron given input and weights
+	
+	void setActFn(String actFn) {
+		this.actFn=actFn;
+	}
+	
+	//multiply each input by weight and add bias
+	//add these values together to get single output
+	//feed this value into activation function
 	public double calcOut() {
 		double[] outArray = new double[input.size()];
-		double sum = 0;
+		double out = 0;
 		
 		for(int i=0; i<input.size(); i++) {
-			outArray[i] = input.get(i) * weight.get(i);
-			sum=sum+outArray[i];		
+			outArray[i] = (input.get(i) * weight.get(i)) + bias;
+			out=out+outArray[i];
 		}
-		output=sum;
-		return sum;
+
+		//activation function heavy lifting
+		switch(actFn) {
+			case "linear":
+				output=out;
+				break;
+			case "binstep":
+				if(out<0) { output=0; }
+				else if(out>=0){ output=1; };
+				break;
+		}
+		return output;
 	}
 	
-	void setId(String id){
-		this.id = id;
-	}
 	
-	
+
+
 	public static void main(String[] args) {
-		
+/*
 		List<Double> staticInput = new ArrayList<Double>();
-		staticInput.add(5.0);
+		staticInput.add(10.0);
 		staticInput.add(10.0);
 		staticInput.add(15.0);
 		
@@ -54,52 +66,15 @@ public class Neuron {
 		weight1.add(0.2);
 		weight1.add(0.3);
 		
-		List<Double> weight2 = new ArrayList<Double>();
-		weight2.add(0.9);
-		weight2.add(0.8);
-		weight2.add(0.7);
-		
-		Neuron n1 = new Neuron();
-		n1.setInput(staticInput);
-		n1.setWeight(weight1);
-		n1.setId("n1");
+		Neuron n1 = new Neuron(staticInput, weight1);
+		n1.setActFn("linear");
 		n1.calcOut();
 		
-		Neuron n2 = new Neuron();
-		n1.setInput(staticInput);
-		n1.setWeight(weight2);
-		n1.setId("n2");
-		n1.calcOut();
-		
-		
-		System.out.println(n1.id);
 		System.out.println("input is " + n1.input);
 		System.out.println("weight is " + n1.weight);
-		System.out.println("output is " + n1.output);
-		
-		System.out.println(n2.id);
-		System.out.println("input is " + n2.input);
-		System.out.println("weight is " + n2.weight);
-		System.out.println("output is " + n2.output);
-		
-		List<Double> l2input = new ArrayList<Double>();
-		l2input.add(n1.output);
-		l2input.add(n2.output);
-		
-		List<Double> l2weight= new ArrayList<Double>();
-		l2weight.add(0.25);
-		l2weight.add(0.5);
-		
-		Neuron n3 = new Neuron();
-		n3.calcOut();
-		
-		System.out.println(n3.id);
-		System.out.println("input is " + n3.input);
-		System.out.println("weight is " + n3.weight);
-		System.out.println("output is " + n3.output);
-		
-		
+		System.out.println("output is " + n1.output);	
+*/
 	}
-	
+
 }
 

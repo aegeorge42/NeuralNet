@@ -6,13 +6,14 @@ import java.util.*;
  * Non-neural net program functionality
  */
 public class Controller {
-	static int editStage=1;
-	
+	int editStage=1;
+
 	public Controller() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public static void main(String[] args) {
+		Controller controller = new Controller();
 		Net net = new Net();
 		
 		Scanner inputScanner = new Scanner(System.in);
@@ -21,13 +22,13 @@ public class Controller {
 		staticInput.add(2.0);
 		staticInput.add(3.0);
 		
-		while(editStage==1) {
+		while(controller.editStage==1) {
 			
-			System.out.println("press l to add layer");
+			System.out.println("press l to add layer or n to add neuron");
 			String inputStr = inputScanner.next();
 			
 			if(inputStr.equals("l")) {
-				net.addEmptyLayer();
+				net.addLayer();
 				System.out.println("net has " + net.layers.size() +" layers");
 			} else if (inputStr.equals("n")){
 				System.out.println("select layer");
@@ -38,13 +39,13 @@ public class Controller {
 				Random r = new Random();
 				char c = (char)(r.nextInt(26) + 'a');
 				
-				currLayer.addNeuron(staticInput, Character.toString(c));
+//				currLayer.addNeuron(staticInput, Character.toString(c));
 				System.out.println(currLayer.layerNumber + " has " + currLayer.neurons.size() +" neurons");
 			}
 			
 			for(Layer layer : net.layers) {
 				for(Neuron neuron : layer.neurons) {
-					System.out.println(neuron.id + " input: " + neuron.input + " output: " + neuron.output);
+					System.out.println(" input: " + neuron.input + " output: " + neuron.output);
 				}
 				System.out.println("layer output:" + layer.layerOutput);
 
